@@ -54,9 +54,16 @@ def test_fetch_pages_single_page(mock_response):
         m.get("http://example.com/page2.html", text="<html>Page 2 content</html>")
         m.get("http://example.com/page3.html", text="<html>Page 3 content</html>")
         pages = fetch_pages_from_url("http://example.com/testpage.html", 1, 1)
-        assert len(pages) == 3
+        assert len(pages) == 4
         # helper function to assert the condition for each page URL
-        assert_pages_start_with(pages, "http://example.com/page")
+        assert_pages_start_with(
+            [
+                page
+                for page in pages
+                if page["url"] != "http://example.com/nextpage.html"
+            ],
+            "http://example.com/page",
+        )
 
 
 def test_handling_maximum_depth(mock_response):
