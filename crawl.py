@@ -112,7 +112,12 @@ def fetch_pages_from_url(url: str, current_depth: int, max_depth: int) -> list[d
 
         log.info(f"Fetching pages from {current_url} at depth {current_depth}")
         html_content = fetch_html_content(current_url)
-        pages.extend(extract_page_urls(html_content, current_url, current_depth))
+        collected_pages = extract_page_urls(
+            html_content,
+            current_url,
+            current_depth,
+        )
+        pages.extend(collected_pages)
 
         # Stop crawling if current depth reaches maximum depth
         if current_depth == max_depth:
