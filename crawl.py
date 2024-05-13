@@ -1,7 +1,7 @@
 from urllib.parse import urljoin
 
 import requests
-from bs4 import BeautifulSoup as soup
+from bs4 import BeautifulSoup
 
 from logger import setup_logger
 
@@ -49,9 +49,24 @@ def extract_page_urls(html_content: str, url: str, current_depth: int) -> list[d
             "page": url,
             "depth": current_depth,
         }
-        for a in soup(html_content, "html.parser").find_all("a")
+        for a in BeautifulSoup(html_content, "html.parser").find_all("a")
         if "href" in a.attrs
     ]
+
+
+def extract_links(html_content: str, url: str) -> list[str]:
+    """
+    Parse HTML content to extract links.
+
+    Args:
+        html_content (str): The raw HTML content.
+        url (str): The URL from which the HTML content was fetched.
+
+    Returns:
+        A list of URL strings from the href attributes of anchor tags.
+    """
+    soup = BeautifulSoup(html_content, "html.parser")
+    return [a["href"] for a in soup.find_all("a") if "href" in a.attrs]
 
 
 def main() -> None:
