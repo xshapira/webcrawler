@@ -156,7 +156,7 @@ def save_pages_metadata(pages: list[dict]) -> None:
         return
 
     metadata = {"pages": pages}
-    with open(pages_dir / "pages_metadata.json") as fp:
+    with open(pages_dir / "pages_metadata.json", "w") as fp:
         json.dump(metadata, fp, indent=4)
 
 

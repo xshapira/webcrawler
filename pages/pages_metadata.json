@@ -1,0 +1,304 @@
+{
+    "pages": [
+        {
+            "url": "https://www.langchain.com/",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/langchain",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/langsmith",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/langserve",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/retrieval",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/agents",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/evaluation",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://templates.langchain.com/",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://integrations.langchain.com/",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://python.langchain.com/docs/get_started/quickstart",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://js.langchain.com/docs/get_started/quickstart",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://blog.langchain.dev/",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/case-studies",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/use-cases",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/partners",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://trust.langchain.com/",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://python.langchain.com/docs/get_started/introduction",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://docs.smith.langchain.com/tracing",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/pricing",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/about",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/careers",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://smith.langchain.com/",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/contact-sales",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://python.langchain.com/docs/get_started/introduction",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/langchain",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/langsmith",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/langserve",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/langchain",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://smith.langchain.com/",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/contact-sales",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/use-cases",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://blog.langchain.dev/ally-financial-collaborates-with-langchain-to-deliver-critical-coding-module-to-mask-personal-identifying-information-in-a-compliant-and-safe-manner/",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://blog.langchain.dev/llms-accelerate-adyens-support-team-through-smart-ticket-routing-and-support-agent-copilot/",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://blog.langchain.dev/langchain-partners-with-elastic-to-launch-the-elastic-ai-assistant/",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/langsmith",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/contact-sales",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://smith.langchain.com/",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/langchain",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/langsmith",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/langserve",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/agents",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/evaluation",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/retrieval",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://python.langchain.com/docs/get_started/introduction",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://js.langchain.com/docs/get_started/introduction/",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://github.com/langchain-ai",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://integrations.langchain.com/",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://templates.langchain.com/",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://python.langchain.com/docs/get_started/quickstart",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://js.langchain.com/docs/get_started/quickstart",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/about",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://blog.langchain.dev/",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://twitter.com/LangChainAI",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://discord.com/invite/6adMQxSpJS",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.linkedin.com/company/langchain/",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.youtube.com/@LangChain",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.dropbox.com/scl/fo/t43qvtl88hyrla8c7zec9/h?rlkey=8h4ihkmonqzpy9omq1oi4rtv9&e=1&dl=0",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://status.smith.langchain.com/",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/privacy-policy",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        },
+        {
+            "url": "https://www.langchain.com/terms-of-service",
+            "page": "https://www.langchain.com",
+            "depth": 1
+        }
+    ]
+}
