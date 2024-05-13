@@ -50,7 +50,9 @@ def test_fetch_pages_single_page(mock_response):
     """
     with requests_mock.Mocker() as m:
         m.get("http://example.com/testpage.html", text=mock_response)
-        m.get("http://example.com/nextpage.html", text=mock_response)
+        m.get("http://example.com/page1.html", text="<html>Page 1 content</html>")
+        m.get("http://example.com/page2.html", text="<html>Page 2 content</html>")
+        m.get("http://example.com/page3.html", text="<html>Page 3 content</html>")
         pages = fetch_pages_from_url("http://example.com/testpage.html", 1, 1)
         assert len(pages) == 3
         # helper function to assert the condition for each page URL
@@ -63,11 +65,15 @@ def test_handling_maximum_depth(mock_response):
     """
     with requests_mock.Mocker() as m:
         m.get("http://example.com/testpage.html", text=mock_response)
+        m.get("http://example.com/page1.html", text="<html>Page 1 content</html>")
+        m.get("http://example.com/page2.html", text="<html>Page 2 content</html>")
+        m.get("http://example.com/page3.html", text="<html>Page 3 content</html>")
         m.get("http://example.com/nextpage.html", text=mock_response)
-        # assuming depth 1 means only the initial page is processed
+        # assuming depth 2 means the initial page and pages from
+        # "next page" are processed
         pages = fetch_pages_from_url("http://example.com/testpage.html", 1, 2)
-        # make sure no additional pages from "next page" are included
-        assert len(pages) == 6
+        # make sure pages from "next page" are included
+        assert len(pages) == 8
 
 
 def test_save_pages_locally(requests_mock, mocker):
