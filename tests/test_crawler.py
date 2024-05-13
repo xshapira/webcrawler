@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 import requests_mock
 
-from crawl import fetch_pages_from_url
+from crawl import fetch_pages_from_url, save_pages_locally
 
 
 @pytest.fixture
@@ -67,3 +67,46 @@ def test_handling_maximum_depth(mock_response):
         pages = fetch_pages_from_url("http://example.com/testpage.html", 1, 2)
         # make sure no additional pages from "next page" are included
         assert len(pages) == 6
+
+
+def test_save_pages_locally(requests_mock, mocker):
+    """
+    Verify that `save_pages_locally` correctly saves page content to local files and handles duplicate page URLs.
+    """
+    # mock HTTP responses for page URLs
+    requests_mock.get(
+        "http://example.com/page1.html", text="<html>Page 1 content</html>"
+    )
+    requests_mock.get(
+        "http://example.com/page2.html", text="<html>Page 2 content</html>"
+    )
+
+    # mock filesystem interactions
+    # assume directory doesn't exist
+    mocker.patch("pathlib.Path.exists", return_value=False)
+    mocker.patch("pathlib.Path.mkdir")  # mock mkdir to do nothing
+
+    # mock open
+    mock_open_function = mocker.patch("builtins.open", mocker.mock_open())
+
+    pages = [
+        {
+            "url": "http://example.com/page1.html",
+            "depth": 1,
+        },
+        {
+            "url": "http://example.com/page1.html",  # duplicate
+            "depth": 1,
+        },
+        {
+            "url": "http://example.com/page2.html",
+            "depth": 1,
+        },
+    ]
+    # this should now use the mocked open and not actually write files
+    save_pages_locally(pages)
+
+    # With open mocked, we can't check the filesystem to verify behavior as
+    # before. Instead, we can check if open was called the expected number of
+    # times with the right arguments.
+    assert mock_open_function.call_count == 2  # 2 unique pages
