@@ -97,6 +97,8 @@ def fetch_pages_from_url(url: str, current_depth: int, max_depth: int) -> list[d
 
         Return an empty list if no pages are found or in case of a request failure.
     """
+    if max_depth <= 0:
+        return []
     pages = []
     visited_urls = set()
     queue = deque([(url, current_depth)])
