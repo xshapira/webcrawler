@@ -1,9 +1,10 @@
+import json
 from pathlib import Path
 
 import pytest
 import requests_mock
 
-from crawl import fetch_pages_from_url, save_pages_locally
+from crawl import fetch_pages_from_url, save_pages_locally, save_pages_metadata
 
 
 @pytest.fixture
@@ -110,3 +111,41 @@ def test_save_pages_locally(requests_mock, mocker):
     # before. Instead, we can check if open was called the expected number of
     # times with the right arguments.
     assert mock_open_function.call_count == 2  # 2 unique pages
+
+
+def test_save_pages_metadata(mocker, cleanup_pages_dir):
+    """
+    Verify that `save_pages_metadata` correctly saves page metadata to a JSON file.
+    """
+    # mock filesystem interactions
+    # assume directory doesn't exist
+    mocker.patch("pathlib.Path.exists", return_value=False)
+    mocker.patch("pathlib.Path.mkdir")  # mock mkdir to do nothing
+
+    # mock open
+    mock_open = mocker.mock_open()
+    mocker.patch("builtins.open", mock_open)
+
+    # mock json.dump
+    mock_json_dump = mocker.patch.object(json, "dump")
+    pages = [
+        {
+            "url": "http://example.com/page1.html",
+            "depth": 1,
+        },
+        {
+            "url": "http://example.com/page2.html",
+            "depth": 1,
+        },
+    ]
+    save_pages_metadata(pages)
+
+    # Check if open was called with the correct arguments
+    expected_path = Path("pages/pages_metadata.json")
+    mock_open.assert_called_once_with(expected_path, "w")
+
+    # Check if json.dump was called with the correct arguments
+    expected_data = {"pages": pages}
+    mock_json_dump.assert_called_once_with(
+        expected_data, mock_open.return_value, indent=4
+    )
