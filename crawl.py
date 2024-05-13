@@ -1,3 +1,4 @@
+from collections import deque
 from urllib.parse import urljoin
 
 import requests
@@ -67,6 +68,54 @@ def extract_links(html_content: str, url: str) -> list[str]:
     """
     soup = BeautifulSoup(html_content, "html.parser")
     return [a["href"] for a in soup.find_all("a") if "href" in a.attrs]
+
+
+def fetch_pages_from_url(url: str, current_depth: int, max_depth: int) -> list[dict]:
+    """
+    Fetch pages from a given URL and its linked pages up to a specified depth.
+
+    Note:
+        We are using BFS algorithm to crawl pages, avoiding processing the same URL multiple times.
+
+    Args:
+        url (str): The starting URL from which to fetch pages.
+        current_depth (int): The current depth of the URL being processed.
+        max_depth (int): The maximum depth to crawl from the starting URL.
+
+    Returns:
+        A list of dictionaries, each containing the following keys:
+        - 'url': The URL of the page.
+        - 'html': The raw HTML content of the page.
+        - 'depth': The depth at which the page was found relative to the starting URL.
+
+        Return an empty list if no pages are found or in case of a request failure.
+    """
+    pages = []
+    visited_urls = set()
+    queue = deque([(url, current_depth)])
+
+    while queue:
+        current_url, current_depth = queue.popleft()
+        # Skip processing if the URL has already been visited
+        if current_url in visited_urls:
+            continue
+        visited_urls.add(current_url)
+
+        log.info(f"Fetching pages from {current_url} at depth {current_depth}")
+        html_content = fetch_html_content(current_url)
+        pages.extend(extract_page_urls(html_content, current_url, current_depth))
+
+        # Stop crawling if current depth reaches maximum depth
+        if current_depth == max_depth:
+            continue
+        links = extract_links(html_content, current_url)
+        for link in links:
+            page_url = urljoin(current_url, link)
+            # `current_depth` incremented by 1
+            # indicating it's now one level deeper.
+            queue.append((page_url, current_depth + 1))
+
+    return pages
 
 
 def main() -> None:
