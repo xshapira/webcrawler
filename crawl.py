@@ -1,5 +1,6 @@
 import json
 import shutil
+import sys
 from collections import deque
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
@@ -183,7 +184,15 @@ def save_pages_locally(pages: list[dict]) -> None:
 
 
 def main() -> None:
-    pass
+    # check if only two command-line arguments are provided
+    if len(sys.argv) != 3:
+        log.error("Usage: <script_name> <start_url> <depth>")
+        sys.exit(1)
+
+    _, start_url, depth = sys.argv
+    pages = fetch_pages_from_url(start_url, 1, int(depth))
+    save_pages_metadata(pages)
+    save_pages_locally(pages)
 
 
 if __name__ == "__main__":
