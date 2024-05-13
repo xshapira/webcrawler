@@ -143,6 +143,29 @@ def save_pages_metadata(pages: list[dict]) -> None:
         json.dump(metadata, fp, indent=4)
 
 
+def save_pages_locally(pages: list[dict]) -> None:
+    """
+    Save the fetched pages to local files.
+
+    Args:
+        pages (list of dict): A list of dictionaries where each dictionary contains the 'url' and 'html' keys.
+    """
+    downloaded_pages = set()
+    for page in pages:
+        if page["url"] in downloaded_pages:
+            # skip duplicate pages
+            continue
+        try:
+            page_content = page["html"]
+            filename = extract_filename_from_url(page["url"])  # noqa: F821
+            with open(f"pages/{filename}", encoding="utf-8") as fp:
+                fp.write(page_content)
+            log.info(f"Saved page: {page['url']}")
+            downloaded_pages.add(page["url"])
+        except requests.exceptions.RequestException as exc:
+            log.error(f"Failed to save page {page['url']}: {exc}")
+
+
 def main() -> None:
     pass
 
