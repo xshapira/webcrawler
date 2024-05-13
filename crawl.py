@@ -167,16 +167,18 @@ def save_pages_locally(pages: list[dict]) -> None:
     Args:
         pages (list of dict): A list of dictionaries where each dictionary contains the 'url' and 'html' keys.
     """
+    # tracks downloaded pages to avoid duplicates
     downloaded_pages = set()
     for page in pages:
         if page["url"] in downloaded_pages:
             # skip duplicate pages
             continue
         try:
-            page_content = page["html"]
-            filename = extract_filename_from_url(page["url"])
-            with open(f"pages/{filename}", encoding="utf-8") as fp:
-                fp.write(page_content)
+            page_data = requests.get(page["url"], stream=True)
+            page_name = extract_filename_from_url(page["url"])
+            file_path = Path("pages", f"{page_name}.html")
+            with open(file_path, "wb") as fp:
+                fp.write(page_data.content)
             log.info(f"Saved page: {page['url']}")
             downloaded_pages.add(page["url"])
         except requests.exceptions.RequestException as exc:
