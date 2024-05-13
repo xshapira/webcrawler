@@ -149,7 +149,7 @@ def save_pages_metadata(pages: list[dict]) -> None:
         pages (list of dict): A list of dictionaries where each dictionary contains the 'url', 'depth', and 'html' keys.
     """
     pages_dir = Path("pages")
-    if not pages_dir.exists():
+    if pages_dir.exists():
         shutil.rmtree(pages_dir)
     # don't raise an error if directory already exists
     pages_dir.mkdir(exist_ok=True)
