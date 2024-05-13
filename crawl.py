@@ -1,4 +1,7 @@
+import json
+import shutil
 from collections import deque
+from pathlib import Path
 from urllib.parse import urljoin
 
 import requests
@@ -116,6 +119,28 @@ def fetch_pages_from_url(url: str, current_depth: int, max_depth: int) -> list[d
             queue.append((page_url, current_depth + 1))
 
     return pages
+
+
+def save_pages_metadata(pages: list[dict]) -> None:
+    """
+    Save page metadata to a JSON file.
+
+    Args:
+        pages (list of dict): A list of dictionaries where each dictionary contains the 'url', 'depth', and 'html' keys.
+    """
+    pages_dir = Path("pages")
+    if not pages_dir.exists():
+        shutil.rmtree(pages_dir)
+    # don't raise an error if directory already exists
+    pages_dir.mkdir(exist_ok=True)
+
+    if not pages:
+        log.info("No pages to save metadata for.")
+        return
+
+    metadata = {"pages": pages}
+    with open(pages_dir / "pages_metadata.json") as fp:
+        json.dump(metadata, fp, indent=4)
 
 
 def main() -> None:
