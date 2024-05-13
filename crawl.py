@@ -2,7 +2,7 @@ import json
 import shutil
 from collections import deque
 from pathlib import Path
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -121,6 +121,22 @@ def fetch_pages_from_url(url: str, current_depth: int, max_depth: int) -> list[d
     return pages
 
 
+def extract_filename_from_url(url: str) -> str:
+    """
+    Extract the filename from a URL, ignoring query parameters.
+
+    Args:
+        url (str): The URL from which to extract the filename.
+
+    Returns:
+        str: The filename with its extension, without query parameters.
+    """
+    parsed_url = urlparse(url)
+    path = parsed_url.path
+    # use Path to get the last component of the path as filename
+    return Path(path).name
+
+
 def save_pages_metadata(pages: list[dict]) -> None:
     """
     Save page metadata to a JSON file.
@@ -157,7 +173,7 @@ def save_pages_locally(pages: list[dict]) -> None:
             continue
         try:
             page_content = page["html"]
-            filename = extract_filename_from_url(page["url"])  # noqa: F821
+            filename = extract_filename_from_url(page["url"])
             with open(f"pages/{filename}", encoding="utf-8") as fp:
                 fp.write(page_content)
             log.info(f"Saved page: {page['url']}")
