@@ -12,6 +12,8 @@ from logger import setup_logger
 
 log = setup_logger(__name__)
 
+MAX_PAGES = 10
+
 
 def fetch_html_content(url: str) -> str | None:
     """
@@ -48,7 +50,7 @@ def extract_page_urls(html_content: str, url: str, current_depth: int) -> list[d
         - 'page': The URL of the page where the URL was found.
         - 'depth': The depth at which the URL was found relative to the starting URL.
     """
-    return [
+    collected_pages = [
         {
             "url": urljoin(url, a["href"]),
             "page": url,
@@ -57,6 +59,7 @@ def extract_page_urls(html_content: str, url: str, current_depth: int) -> list[d
         for a in BeautifulSoup(html_content, "html.parser").find_all("a")
         if "href" in a.attrs
     ]
+    return collected_pages[:MAX_PAGES]
 
 
 def extract_links(html_content: str, url: str) -> list[str]:
