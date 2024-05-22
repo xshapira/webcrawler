@@ -1,3 +1,4 @@
+import hashlib
 import json
 import shutil
 import sys
@@ -77,6 +78,21 @@ def extract_links(html_content: str, url: str) -> list[str]:
     return [a["href"] for a in soup.find_all("a") if "href" in a.attrs]
 
 
+def hash_url(url: str) -> int:
+    """
+    Compute the SHA-256 hash of a URL and return it as an integer.
+
+    Hashing the URL allows for efficient storage and comparison in the `visited_urls` set by reducing memory usage compared to storing full URL strings.
+
+    Args:
+        url (str): The URL string to be hashed.
+
+    Returns:
+        int: The integer representation of the SHA-256 hash of the URL.
+    """
+    return int(hashlib.sha256(url.encode()).hexdigest(), 16)
+
+
 def fetch_pages_from_url(url: str, current_depth: int, max_depth: int) -> list[dict]:
     """
     Fetch pages from a given URL and its linked pages up to a specified depth.
@@ -99,16 +115,18 @@ def fetch_pages_from_url(url: str, current_depth: int, max_depth: int) -> list[d
     """
     if max_depth <= 0:
         return []
+
     pages = []
-    visited_urls = set()
+    visited_urls_hashes = set()
     queue = deque([(url, current_depth)])
 
     while queue:
         current_url, current_depth = queue.popleft()
+        current_url_hash = hash_url(current_url)
         # Skip processing if the URL has already been visited
-        if current_url in visited_urls:
+        if current_url in visited_urls_hashes:
             continue
-        visited_urls.add(current_url)
+        visited_urls_hashes.add(current_url_hash)
 
         log.info(f"Fetching pages from {current_url} at depth {current_depth}")
         html_content = fetch_html_content(current_url)
