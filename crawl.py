@@ -124,7 +124,7 @@ def fetch_pages_from_url(url: str, current_depth: int, max_depth: int) -> list[d
         current_url, current_depth = queue.popleft()
         current_url_hash = hash_url(current_url)
         # Skip processing if the URL has already been visited
-        if current_url in visited_urls_hashes:
+        if current_url_hash in visited_urls_hashes:
             continue
         visited_urls_hashes.add(current_url_hash)
 
