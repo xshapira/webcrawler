@@ -202,13 +202,13 @@ def save_pages_locally(pages: list[dict]) -> None:
             # skip duplicate pages
             continue
         try:
-            page_data = requests.get(page["url"], stream=True)
-            page_name = extract_filename_from_url(page["url"])
-            file_path = Path("pages", f"{page_name}.html")
-            with open(file_path, "wb") as fp:
-                fp.write(page_data.content)
-            log.info(f"Saved page: {page['url']}")
-            downloaded_pages.add(page["url"])
+            with requests.get(page["url"], stream=True) as page_data:
+                page_name = extract_filename_from_url(page["url"])
+                file_path = Path("pages", f"{page_name}.html")
+                with open(file_path, "wb") as fp:
+                    fp.write(page_data.content)
+                log.info(f"Saved page: {page['url']}")
+                downloaded_pages.add(page["url"])
         except requests.exceptions.RequestException as exc:
             log.error(f"Failed to save page {page['url']}: {exc}")
 
