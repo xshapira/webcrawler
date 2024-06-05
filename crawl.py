@@ -1,3 +1,4 @@
+import functools
 import hashlib
 import json
 import shutil
@@ -16,6 +17,7 @@ log = setup_logger(__name__)
 MAX_PAGES = 10
 
 
+@functools.lru_cache(maxsize=500)
 def fetch_html_content(url: str) -> str | None:
     """
     Fetch HTML content for a given URL.
